@@ -8,9 +8,11 @@ import dev.inmo.tgbotapi.utils.RiskFeature
 import io.github.medianik.starter.telegram.annotation.param.WholeTextValue
 import io.github.medianik.starter.telegram.filter.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
+import org.springframework.stereotype.Component
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
 
+@Component
 class WholeTextResolver : CommandParameterFilter {
     override fun supportsParameter(parameter: KParameter, function: KFunction<*>): Boolean {
         return parameter.type.classifier == String::class && hasAnnotationInherited(parameter, WholeTextValue::class)

@@ -8,12 +8,13 @@ import io.github.medianik.starter.telegram.annotation.param.SendDateValue
 import io.github.medianik.starter.telegram.filter.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
-import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
+import org.springframework.stereotype.Component
 import java.time.*
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
 
+@Component
 class SendDateResolver : CommandParameterFilter {
     override fun supportsParameter(parameter: KParameter, function: KFunction<*>): Boolean {
         return oneOfDateTypes(parameter.clazz) && hasAnnotationInherited(parameter, SendDateValue::class)

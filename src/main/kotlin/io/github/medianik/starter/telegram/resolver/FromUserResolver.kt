@@ -13,11 +13,13 @@ import io.github.medianik.starter.telegram.filter.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
+import org.springframework.stereotype.Component
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
 import kotlin.reflect.full.isSubclassOf
 
+@Component
 class FromUserResolver : CommandParameterFilter {
     companion object{
         private val expectedTypes = listOf(User::class, Long::class)

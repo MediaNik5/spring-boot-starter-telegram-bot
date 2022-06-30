@@ -6,10 +6,12 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.filter.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
+import org.springframework.stereotype.Component
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
 
+@Component
 class BotResolver : CommandParameterFilter {
     override fun supportsParameter(parameter: KParameter, function: KFunction<*>): Boolean {
         return oneOfBotTypes(parameter.clazz)

@@ -9,6 +9,7 @@ import io.github.medianik.starter.telegram.filter.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
+import org.springframework.stereotype.Component
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
@@ -16,6 +17,7 @@ import kotlin.reflect.full.isSubclassOf
 
 private typealias MessageClass = dev.inmo.tgbotapi.types.message.abstracts.Message
 
+@Component
 class MessageResolver : CommandParameterFilter {
     companion object{
         private val expectedTypes = listOf(MessageClass::class, Long::class)
