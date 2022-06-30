@@ -6,10 +6,15 @@ of telegram bots with power of Spring Boot.
 This starter lets you write code in controller-like style for handling 
 telegram bot commands.
 
-Examples:
+Ensure you have application.properties such like this:
+```properties
+io.github.medianik.telegram.bot-token=
+io.github.medianik.telegram.bot-username=
+```
+
+Examples of controllers:
 
 ```kotlin
-
 import io.github.medianik.starter.telegram.annotation.BotCommand
 import io.github.medianik.starter.telegram.annotation.BotHandler
 import io.github.medianik.starter.telegram.annotation.param.Param
