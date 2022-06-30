@@ -1,0 +1,7 @@
+src/main/kotlin/io/github/medianik/starter/use/Starter.kt
+src/main/resources/application.properties
+
+.idea
+.gradle
+build
+gradle
