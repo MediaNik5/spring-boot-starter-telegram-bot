@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URI
 
 plugins {
     id("org.springframework.boot") version "2.7.1"
@@ -6,10 +7,12 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     `maven-publish`
+    `java-library`
+    signing
 }
 
-group = "io.github.medianik"
-version = "1.0-SNAPSHOT"
+group = "io.github.medianik5"
+version = "0.1"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -41,13 +44,19 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
     }
 }
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            groupId = "io.github.medianik"
+        create<MavenPublication>("mavenJava") {
+            groupId = "io.github.medianik5"
             artifactId = "spring-boot-starter-telegram-bot"
             version = "0.1"
+
+            from(components["java"])
             pom {
                 name.set("${groupId}:${artifactId}")
                 description.set("Spring boot starter for telegram bot, allowing to create telegram bot with spring boot and " +
@@ -72,8 +81,28 @@ publishing {
                     url.set("http://github.com/MediaNik5/${artifactId}/tree/master")
                 }
             }
-
-            from(components["java"])
         }
+    }
+    repositories {
+        maven{
+            credentials{
+                username = findProperty("user").toString()
+                password = findProperty("password").toString()
+            }
+//            url = if(version.toString().endsWith("SNAPSHOT"))
+//                URI("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+//            else
+            url = URI("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+        }
+    }
+}
+
+signing{
+    sign(publishing.publications["mavenJava"])
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }
