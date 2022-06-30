@@ -52,7 +52,7 @@ class FromUserResolver : CommandParameterFilter {
             }
         }
         if(clazz == Long::class){
-            val fromId = from?.id
+            val fromId = from?.id?.chatId
             if(fromId != null){
                 return fromId
             }

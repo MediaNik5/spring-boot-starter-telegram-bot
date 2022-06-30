@@ -47,7 +47,7 @@ class ChatResolver : CommandParameterFilter {
     ): Any {
         val clazz = parameter.clazz
         if(clazz == Long::class)
-            return incomingMessage.chat.id
+            return incomingMessage.chat.id.chatId
         if(clazz.isSubclassOf(ChatClass::class))
             return incomingMessage.chat
         throw InvalidTypeException(function, parameter, expectedTypes)
