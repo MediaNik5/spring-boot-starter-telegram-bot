@@ -30,6 +30,9 @@ telegram bot commands.
 
 # How to use
 
+You can initialize project with [Spring Initialzr](https://start.spring.io/) with 
+kotlin as language and gradle project
+
 Add this to your dependencies in `build.gradle.kts`:
 ```gradle
 dependencies {
