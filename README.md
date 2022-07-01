@@ -13,21 +13,24 @@ io.github.medianik.telegram.bot-username=
 ```
 
 ##### Table of contents
-- [Spring boot starter for telegram bot](#spring-boot-starter-for-telegram-bot)
 - [Principles](#principles)
-    * [Controller-likeness](#controller-likeness)
+  * [Controller-likeness](#controller-likeness)
+  * [Return value](#return-value)
 - [Annotations](#annotations)
-    * [@Param](#param)
-    * [@BotValue](#botvalue)
-    * [@ChatValue](#chatvalue)
-    * [@MessageValue](#messagevalue)
-    * [@SendDateValue](#senddatevalue)
-    * [@UserValue](#uservalue)
-    * [@RemainingParams](#remainingparams)
-    * [@WholeTextValue](#wholetextvalue)
+  * [Parameters](#parameters)
+    + [@Param](#param)
+    + [@BotValue](#botvalue)
+    + [@ChatValue](#chatvalue)
+    + [@MessageValue](#messagevalue)
+    + [@SendDateValue](#senddatevalue)
+    + [@UserValue](#uservalue)
+    + [@RemainingParams](#remainingparams)
+    + [@WholeTextValue](#wholetextvalue)
+  * [Other annotations](#other-annotations)
+    + [@IgnoreException](#ignoreexception)
+    + [@NoReply](#noreply)
 - [Default values](#default-values)
 - [Examples](#examples)
-
 ----
 
 # Principles
@@ -68,9 +71,23 @@ class SimpleBotController {
 
 ```
 
+## Return value
+
+By default if you have String return value in bot handler, it
+will be automatically be converted to reply message to user
+who's send the message to bot.
+```kotlin
+@BotCommand("/command")
+fun handleCommand(): String {
+    // ...
+    return "Hello, world!" // bot would reply "Hello, world!" to user
+}
+```
 # Annotations
 
-## Param
+## Parameters
+
+### Param
 
 If you want to get some *params* that user has sent to bot 
 alongside with command, you can use `@Param` annotation:
@@ -102,7 +119,7 @@ fun handleCommand(@Param name: String, somethingVeryUseful: SomeType, @Param las
 }
 ```
 
-## BotValue
+### BotValue
 
 If you want to get instance of bot to do some difficult logic, 
 you can use @BotValue on parameter to get it.</br>
@@ -119,7 +136,7 @@ fun handleCommand(bot: TelegramBot){
 }
 ```
 
-## ChatValue
+### ChatValue
 
 You can get chat instance or chat id for message that was sent to bot.</br>
 If you use Chat type, you might not specify the type. If you
@@ -139,7 +156,7 @@ fun handleCommand1(@ChatValue chatId: Long){
 }
 ```
 
-## MessageValue
+### MessageValue
 
 If you want to get message instance, you can specify type Message for param
 (`@MessageValue` is optional).</br>
@@ -161,7 +178,7 @@ fun handleCommand1(@MessageValue messageId: Long){
 }
 ```
 
-## SendDateValue
+### SendDateValue
 
 If you want to get DateTime when message was sent, use @SendDateValue annotation.
 Supported types are: java's `Instant`, `LocalDate`, `LocalTime`, `LocalDateTime`,
@@ -177,7 +194,7 @@ fun handleCommand(@SendDateValue date: DateTime){
 }
 ```
 
-## UserValue
+### UserValue
 
 If you want to get User instance, you can specify type User for param
 (`@UserValue` is optional).</br>
@@ -198,7 +215,7 @@ fun handleCommand1(@UserValue userId: Long){
 }
 ```
 
-## RemainingParams
+### RemainingParams
 
 If you want to get remaining params after those that you have specified before,
 you can use `@RemainingParams` annotation.
@@ -217,7 +234,7 @@ fun handleCommand(
 }
 ```
 
-## WholeTextValue
+### WholeTextValue
 
 Gets whole text that was sent to bot.
 
@@ -229,6 +246,48 @@ fun handleCommand(@WholeTextValue text: String){
     // if you want to get only params, use @RemainingParams as first param
 }
 ```
+
+## Other annotations
+
+### IgnoreException
+
+Ignore exception if it happens.
+
+For example ignore that there are two handlers for same command.</br>
+**Notice**: in this case any of the handler might be called. The order is not guaranteed. 
+
+```kotlin
+import io.github.medianik.starter.telegram.annotation.IgnoreException
+import io.github.medianik.starter.telegram.exception.DuplicateBotCommandException
+
+@IgnoreException(DuplicateBotCommandException::class)
+@BotCommand("/command")
+fun handleCommand(){
+    // ...
+}
+
+@IgnoreException(DuplicateBotCommandException::class)
+@BotCommand("/command")
+fun handleCommand1(){
+    // ...
+}
+```
+
+### NoReply
+
+If you want to have return type of function to be `String`, but
+dont want to reply to user, you can use `@NoReply` annotation.
+
+```kotlin
+import io.github.medianik.starter.telegram.annotation.NoReply
+...
+@NoReply
+@BotCommand("/command")
+fun handleCommand(): String{
+    return "Ignored String"
+}
+```
+
 
 # Default values
 

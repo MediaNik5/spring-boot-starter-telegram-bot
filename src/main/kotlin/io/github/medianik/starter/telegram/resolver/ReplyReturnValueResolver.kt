@@ -35,8 +35,10 @@ class ReplyReturnValueResolver : CommandReturnValueFilter {
         return if (returnValue != null) {
             bot.reply(incomingMessage, returnValue)
         } else {
-            throwExceptionIfNotIgnored(function) {
-                NoReturnValueException(function)
+            if(!function.returnType.isMarkedNullable) {
+                throwExceptionIfNotIgnored(function) {
+                    NoReturnValueException(function)
+                }
             }
             return null
         }
