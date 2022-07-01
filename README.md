@@ -121,6 +121,8 @@ class SimpleBotController {
 ```
 
 Every command should be annotated with `@BotCommand`</br>
+It must have at least one property command for command value. 
+Command might consist only of english letters and underscores.
 **Notice**: You cannot have two handlers handling same command.
 
 ```kotlin
