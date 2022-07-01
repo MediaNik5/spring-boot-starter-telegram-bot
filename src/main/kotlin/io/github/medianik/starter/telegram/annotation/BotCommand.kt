@@ -3,6 +3,8 @@ package io.github.medianik.starter.telegram.annotation
 /**
  * Marks the method as a command handler.
  *
+ * There cannot be two handlers for the same command.
+ *
  * The method is being called when the string specified in command field is received by bot.
  * For example, if command is "/start", the method is being called when any string starting with "/start" in any chat is received.
  *
