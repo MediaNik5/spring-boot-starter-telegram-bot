@@ -17,14 +17,14 @@ io.github.medianik.telegram.bot-username=
 - [Principles](#principles)
     * [Controller-likeness](#controller-likeness)
 - [Annotations](#annotations)
-    * [@Param](#-param)
-    * [@BotValue](#-botvalue)
-    * [@ChatValue](#-chatvalue)
-    * [@MessageValue](#-messagevalue)
-    * [@SendDateValue](#-senddatevalue)
-    * [@UserValue](#-uservalue)
-    * [@RemainingParams](#-remainingparams)
-    * [@WholeTextValue](#-wholetextvalue)
+    * [@Param](#param)
+    * [@BotValue](#botvalue)
+    * [@ChatValue](#chatvalue)
+    * [@MessageValue](#messagevalue)
+    * [@SendDateValue](#senddatevalue)
+    * [@UserValue](#uservalue)
+    * [@RemainingParams](#remainingparams)
+    * [@WholeTextValue](#wholetextvalue)
 - [Default values](#default-values)
 - [Examples](#examples)
 
@@ -70,7 +70,7 @@ class SimpleBotController {
 
 # Annotations
 
-## @Param
+## Param
 
 If you want to get some *params* that user has sent to bot 
 alongside with command, you can use `@Param` annotation:
@@ -102,7 +102,7 @@ fun handleCommand(@Param name: String, somethingVeryUseful: SomeType, @Param las
 }
 ```
 
-## @BotValue
+## BotValue
 
 If you want to get instance of bot to do some difficult logic, 
 you can use @BotValue on parameter to get it.</br>
@@ -119,7 +119,7 @@ fun handleCommand(bot: TelegramBot){
 }
 ```
 
-## @ChatValue
+## ChatValue
 
 You can get chat instance or chat id for message that was sent to bot.</br>
 If you use Chat type, you might not specify the type. If you
@@ -139,7 +139,7 @@ fun handleCommand1(@ChatValue chatId: Long){
 }
 ```
 
-## @MessageValue
+## MessageValue
 
 If you want to get message instance, you can specify type Message for param
 (`@MessageValue` is optional).</br>
@@ -161,7 +161,7 @@ fun handleCommand1(@MessageValue messageId: Long){
 }
 ```
 
-## @SendDateValue
+## SendDateValue
 
 If you want to get DateTime when message was sent, use @SendDateValue annotation.
 Supported types are: java's `Instant`, `LocalDate`, `LocalTime`, `LocalDateTime`,
@@ -177,7 +177,7 @@ fun handleCommand(@SendDateValue date: DateTime){
 }
 ```
 
-## @UserValue
+## UserValue
 
 If you want to get User instance, you can specify type User for param
 (`@UserValue` is optional).</br>
@@ -198,7 +198,7 @@ fun handleCommand1(@UserValue userId: Long){
 }
 ```
 
-## @RemainingParams
+## RemainingParams
 
 If you want to get remaining params after those that you have specified before,
 you can use `@RemainingParams` annotation.
@@ -217,7 +217,7 @@ fun handleCommand(
 }
 ```
 
-## @WholeTextValue
+## WholeTextValue
 
 Gets whole text that was sent to bot.
 
