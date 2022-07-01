@@ -13,6 +13,7 @@ io.github.medianik.telegram.bot-username=
 ```
 
 ##### Table of contents
+- [How to use](#how-to-use)
 - [Principles](#principles)
   * [Controller-likeness](#controller-likeness)
   * [Return value](#return-value)
@@ -32,6 +33,68 @@ io.github.medianik.telegram.bot-username=
 - [Default values](#default-values)
 - [Examples](#examples)
 ----
+
+# How to use
+
+Add this to your dependencies in `build.gradle.kts`:
+```gradle
+dependencies {
+    val tgbotapi_version = "2.1.0"
+    implementation("dev.inmo:tgbotapi:$tgbotapi_version")
+    implementation("dev.inmo:tgbotapi.core:$tgbotapi_version")
+    implementation("dev.inmo:tgbotapi.api:$tgbotapi_version")
+    implementation("dev.inmo:tgbotapi.utils:$tgbotapi_version")
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("io.github.medianik5:spring-boot-starter-telegram-bot:0.1")
+}
+```
+
+And apply few plugins:
+```gradle
+plugins {
+    id("org.springframework.boot") version "2.7.1"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
+}
+```
+
+Or you could use `build.gradle`:
+```gradle
+def tgbotapi_version = "2.1.0"
+dependencies {
+    implementation "dev.inmo:tgbotapi:${tgbotapi_version}"
+    implementation "dev.inmo:tgbotapi.core:${tgbotapi_version}"
+    implementation "dev.inmo:tgbotapi.api:${tgbotapi_version}"
+    implementation "dev.inmo:tgbotapi.utils:${tgbotapi_version}"
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "io.github.medianik5:spring-boot-starter-telegram-bot:0.1"
+}
+```
+
+And apply few plugins:
+```gradle
+plugins {
+    id "org.springframework.boot"  version "2.7.1"
+    id "io.spring.dependency-management"  version "1.0.11.RELEASE"
+    kotlin "jvm"  version "1.6.21"
+    kotlin "plugin.spring"  version "1.6.21"
+}
+```
+
+Create main class in non-default package:
+```kotlin
+package com.example.bot
+
+@SpringBootApplication
+class DemoApplication
+
+fun main(args: Array<String>){
+  runApplication<DemoApplication>(*args)
+}
+```
 
 # Principles
 
