@@ -6,12 +6,6 @@ of telegram bots with power of Spring Boot.
 This starter lets you write code in controller-like style for handling 
 telegram bot commands.
 
-Ensure you have application.properties such like this, get them from [BotFather](https://t.me/BotFather):
-```properties
-io.github.medianik.telegram.bot-token=
-io.github.medianik.telegram.bot-username=
-```
-
 ##### Table of contents
 - [How to use](#how-to-use)
 - [Principles](#principles)
@@ -83,6 +77,14 @@ plugins {
     kotlin "plugin.spring"  version "1.6.21"
 }
 ```
+
+Create application.properties in resources folder and fill bot token and bot username,
+get them from [BotFather](https://t.me/BotFather):
+```properties
+io.github.medianik.telegram.bot-token=
+io.github.medianik.telegram.bot-username=
+```
+
 
 Create main class in non-default package:
 ```kotlin
