@@ -6,7 +6,7 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.NoReply
 import io.github.medianik.starter.telegram.exception.NoReturnValueException
-import io.github.medianik.starter.telegram.filter.CommandReturnValueFilter
+import io.github.medianik.starter.telegram.filter.filters.CommandReturnValueFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
 import org.springframework.stereotype.Component

@@ -6,7 +6,7 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.param.ChatValue
 import io.github.medianik.starter.telegram.exception.InvalidTypeException
-import io.github.medianik.starter.telegram.filter.CommandParameterFilter
+import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored

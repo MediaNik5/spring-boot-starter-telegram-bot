@@ -7,10 +7,7 @@ import dev.inmo.tgbotapi.types.message.content.MessageContent
 import dev.inmo.tgbotapi.utils.PreviewFeature
 import io.github.medianik.starter.telegram.annotation.param.Param
 import io.github.medianik.starter.telegram.annotation.param.RemainingParams
-import io.github.medianik.starter.telegram.filter.CommandFilter
-import io.github.medianik.starter.telegram.filter.CommandParameterFilter
-import io.github.medianik.starter.telegram.filter.CommandRequest
-import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.indexOfParameterWithAnnotation
 import org.springframework.stereotype.Component

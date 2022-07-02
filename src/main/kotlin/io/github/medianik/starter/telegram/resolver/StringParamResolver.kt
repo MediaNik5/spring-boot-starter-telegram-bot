@@ -7,7 +7,7 @@ import dev.inmo.tgbotapi.types.message.content.MessageContent
 import dev.inmo.tgbotapi.utils.PreviewFeature
 import io.github.medianik.starter.telegram.annotation.param.Param
 import io.github.medianik.starter.telegram.exception.NoSuchParameterException
-import io.github.medianik.starter.telegram.filter.CommandParameterFilter
+import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.indexOfParameterWithAnnotation
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored

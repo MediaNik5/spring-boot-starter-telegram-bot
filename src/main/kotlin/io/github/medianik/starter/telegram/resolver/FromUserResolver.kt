@@ -9,7 +9,7 @@ import dev.inmo.tgbotapi.utils.RiskFeature
 import io.github.medianik.starter.telegram.annotation.param.UserValue
 import io.github.medianik.starter.telegram.exception.InvalidTypeException
 import io.github.medianik.starter.telegram.exception.NoFromUserException
-import io.github.medianik.starter.telegram.filter.CommandParameterFilter
+import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored

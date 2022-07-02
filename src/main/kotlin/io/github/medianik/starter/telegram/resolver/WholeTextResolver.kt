@@ -6,7 +6,7 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import dev.inmo.tgbotapi.utils.RiskFeature
 import io.github.medianik.starter.telegram.annotation.param.WholeTextValue
-import io.github.medianik.starter.telegram.filter.CommandParameterFilter
+import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import org.springframework.stereotype.Component
 import kotlin.reflect.KFunction

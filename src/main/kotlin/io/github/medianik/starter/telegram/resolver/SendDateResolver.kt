@@ -5,7 +5,7 @@ import dev.inmo.tgbotapi.extensions.behaviour_builder.BehaviourContext
 import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.param.SendDateValue
-import io.github.medianik.starter.telegram.filter.CommandParameterFilter
+import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import org.springframework.stereotype.Component

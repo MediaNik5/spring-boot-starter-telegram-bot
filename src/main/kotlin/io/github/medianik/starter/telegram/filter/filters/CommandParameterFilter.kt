@@ -1,10 +1,14 @@
-package io.github.medianik.starter.telegram.filter
+package io.github.medianik.starter.telegram.filter.filters
 
 import dev.inmo.tgbotapi.extensions.behaviour_builder.BehaviourContext
 import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.FilterBefore
 import io.github.medianik.starter.telegram.exception.DuplicateParameterFilterException
+import io.github.medianik.starter.telegram.filter.CommandFilter
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter

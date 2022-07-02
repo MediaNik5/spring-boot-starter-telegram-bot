@@ -1,6 +1,10 @@
-package io.github.medianik.starter.telegram.filter
+package io.github.medianik.starter.telegram.filter.filters
 
 import io.github.medianik.starter.telegram.exception.ParameterResolverNotFoundException
+import io.github.medianik.starter.telegram.filter.CommandFilter
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
