@@ -9,6 +9,9 @@ import dev.inmo.tgbotapi.utils.RiskFeature
 import io.github.medianik.starter.telegram.annotation.param.UserValue
 import io.github.medianik.starter.telegram.exception.InvalidTypeException
 import io.github.medianik.starter.telegram.exception.NoFromUserException
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
@@ -40,13 +43,13 @@ class FromUserResolver : CommandParameterFilter {
 
     @OptIn(RiskFeature::class)
     override suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): Any? {
         val clazz = parameter.clazz
-        val from = incomingMessage.from
+        val from = request.incomingMessage.from
 
         if(clazz.isSubclassOf(User::class)){
             if(from != null){
@@ -60,8 +63,8 @@ class FromUserResolver : CommandParameterFilter {
             }
         }
         if(!parameter.isOptional){
-            throwExceptionIfNotIgnored(function){
-                NoFromUserException(incomingMessage)
+            throwExceptionIfNotIgnored(context.command.function){
+                NoFromUserException(request.incomingMessage)
             }
         }
         return null

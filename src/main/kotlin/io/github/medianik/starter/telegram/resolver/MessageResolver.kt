@@ -5,6 +5,9 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.param.MessageValue
 import io.github.medianik.starter.telegram.exception.InvalidTypeException
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
@@ -37,17 +40,17 @@ class MessageResolver : CommandParameterFilter {
     }
 
     override suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): Any {
         val clazz = parameter.clazz
         if(clazz == Long::class){
-            return incomingMessage.messageId
+            return request.incomingMessage.messageId
         }
-        if(clazz == MessageClass::class){
-            return incomingMessage
+        if(clazz.isSubclassOf(MessageClass::class)){
+            return request.incomingMessage
         }
 
         throw IllegalStateException("Cannot happen")

@@ -33,7 +33,7 @@ interface CommandParameterFilter : CommandFilter {
                     throwExceptionIfNotIgnored(function) { DuplicateParameterFilterException(function, parameter) }
 
                 request.parameters[parameter.index - 1] =
-                    resolveParameter(context.bot, request.incomingMessage, function, parameter)
+                    resolveParameter(context, request, response, parameter)
             }
         }
     }
@@ -41,9 +41,9 @@ interface CommandParameterFilter : CommandFilter {
     fun supportsParameter(parameter: KParameter, function: KFunction<*>): Boolean
 
     suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): Any?
 }

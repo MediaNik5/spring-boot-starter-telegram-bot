@@ -7,6 +7,9 @@ import dev.inmo.tgbotapi.types.message.content.MessageContent
 import dev.inmo.tgbotapi.utils.PreviewFeature
 import io.github.medianik.starter.telegram.annotation.param.Param
 import io.github.medianik.starter.telegram.annotation.param.RemainingParams
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.indexOfParameterWithAnnotation
@@ -32,14 +35,14 @@ class RemainingParametersResolver : CommandParameterFilter {
 
     @OptIn(PreviewFeature::class)
     override suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): Any? {
-        val index = function.indexOfParameterWithAnnotation(parameter, Param::class)
+        val index = context.command.function.indexOfParameterWithAnnotation(parameter, Param::class)
 
-        val text = incomingMessage.content.requireTextContent().text
+        val text = request.incomingMessage.content.requireTextContent().text
         val parameters = text.split(" ").drop(index + 1)
         return parameters.joinToString(" ")
     }

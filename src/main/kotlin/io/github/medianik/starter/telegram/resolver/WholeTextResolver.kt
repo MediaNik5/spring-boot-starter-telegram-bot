@@ -6,6 +6,9 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import dev.inmo.tgbotapi.utils.RiskFeature
 import io.github.medianik.starter.telegram.annotation.param.WholeTextValue
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import org.springframework.stereotype.Component
@@ -20,11 +23,11 @@ class WholeTextResolver : CommandParameterFilter {
 
     @OptIn(RiskFeature::class)
     override suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): String? {
-        return incomingMessage.text
+        return request.incomingMessage.text
     }
 }

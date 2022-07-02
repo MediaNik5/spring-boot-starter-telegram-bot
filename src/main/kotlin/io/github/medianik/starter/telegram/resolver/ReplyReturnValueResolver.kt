@@ -6,6 +6,9 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.NoReply
 import io.github.medianik.starter.telegram.exception.NoReturnValueException
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandReturnValueFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.throwExceptionIfNotIgnored
@@ -25,16 +28,17 @@ class ReplyReturnValueResolver : CommandReturnValueFilter {
     }
 
     override suspend fun processReturnValue(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         returnValue: Any?,
     ): Any? {
         returnValue as String?
 
         return if (returnValue != null) {
-            bot.reply(incomingMessage, returnValue)
+            context.bot.reply(request.incomingMessage, returnValue)
         } else {
+            val function = context.command.function
             if(!function.returnType.isMarkedNullable) {
                 throwExceptionIfNotIgnored(function) {
                     NoReturnValueException(function)

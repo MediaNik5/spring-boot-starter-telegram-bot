@@ -21,13 +21,13 @@ interface CommandReturnValueFilter : CommandFilter {
 
     override suspend fun filter(context: FilterContext, request: CommandRequest, response: CommandResponse) {
         response.result =
-            processReturnValue(context.bot, request.incomingMessage, context.command.function, response.result)
+            processReturnValue(context, request, response, response.result)
     }
 
     suspend fun processReturnValue(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         returnValue: Any?,
     ): Any?
 }

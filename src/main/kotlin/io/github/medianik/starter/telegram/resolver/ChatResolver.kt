@@ -6,6 +6,9 @@ import dev.inmo.tgbotapi.types.message.abstracts.CommonMessage
 import dev.inmo.tgbotapi.types.message.content.MessageContent
 import io.github.medianik.starter.telegram.annotation.param.ChatValue
 import io.github.medianik.starter.telegram.exception.InvalidTypeException
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.clazz
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
@@ -42,17 +45,17 @@ class ChatResolver : CommandParameterFilter {
     }
 
     override suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): Any {
         val clazz = parameter.clazz
         if(clazz == Long::class)
-            return incomingMessage.chat.id.chatId
+            return request.incomingMessage.chat.id.chatId
         if(clazz.isSubclassOf(ChatClass::class))
-            return incomingMessage.chat
-        throw InvalidTypeException(function, parameter, expectedTypes)
+            return request.incomingMessage.chat
+        throw InvalidTypeException(context.command.function, parameter, expectedTypes)
     }
 }
 

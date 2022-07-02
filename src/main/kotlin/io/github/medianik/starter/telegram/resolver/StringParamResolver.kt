@@ -7,6 +7,9 @@ import dev.inmo.tgbotapi.types.message.content.MessageContent
 import dev.inmo.tgbotapi.utils.PreviewFeature
 import io.github.medianik.starter.telegram.annotation.param.Param
 import io.github.medianik.starter.telegram.exception.NoSuchParameterException
+import io.github.medianik.starter.telegram.filter.CommandRequest
+import io.github.medianik.starter.telegram.filter.CommandResponse
+import io.github.medianik.starter.telegram.filter.FilterContext
 import io.github.medianik.starter.telegram.filter.filters.CommandParameterFilter
 import io.github.medianik.starter.telegram.util.hasAnnotationInherited
 import io.github.medianik.starter.telegram.util.indexOfParameterWithAnnotation
@@ -31,21 +34,21 @@ class StringParamResolver : CommandParameterFilter {
     }
     @OptIn(PreviewFeature::class)
     override suspend fun resolveParameter(
-        bot: BehaviourContext,
-        incomingMessage: CommonMessage<out MessageContent>,
-        function: KFunction<*>,
+        context: FilterContext,
+        request: CommandRequest,
+        response: CommandResponse,
         parameter: KParameter,
     ): String? {
-        val index: Int = function.indexOfParameterWithAnnotation(parameter, Param::class)
+        val index: Int = context.command.function.indexOfParameterWithAnnotation(parameter, Param::class)
 
-        val text = incomingMessage.content.requireTextContent().text
+        val text = request.incomingMessage.content.requireTextContent().text
         val parameters = text.split(" ")
         if (index + 1 < parameters.size) {
             return parameters[index + 1] // +1 for '/command'
         }
 
         if (!parameter.isOptional) {
-            throwExceptionIfNotIgnored(function) {
+            throwExceptionIfNotIgnored(context.command.function) {
                 NoSuchParameterException(
                     parameter.name!!,
                     parameter.index,
