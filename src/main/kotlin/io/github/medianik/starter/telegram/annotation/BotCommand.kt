@@ -12,7 +12,7 @@ package io.github.medianik.starter.telegram.annotation
  *
  * @param command The command name, identifier to be used to determine the command which this method corresponds to. Might start with '/' or not.
  * @param description The command description.
- * @param aliases The command aliases.
+ * @param example The command aliases.
  * @see [BotHandler]
  */
 @Target(AnnotationTarget.FUNCTION)

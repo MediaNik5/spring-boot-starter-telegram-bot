@@ -1,17 +1,17 @@
-package io.github.medianik.starter.telegram.annotation
-
-import io.github.medianik.starter.telegram.filter.CommandFilter
-import kotlin.reflect.KClass
-
-/**
- * Marks the filter as one that must happen before filter [value].
- * [offset] is optional to mark the "distance" between the two filters.
- *
- * [offset] is useful when you have a lot of filters, and you want to ensure they are sequential one after another.
- *
- * If [value] filter had order `n`, then filter marked with this annotation will have order `n - offset`.
- */
-@Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.RUNTIME)
-@MustBeDocumented
-annotation class FilterBefore(val value: KClass<out CommandFilter>, val offset: UInt = 1u)
+//package io.github.medianik.starter.telegram.annotation
+//
+//import io.github.medianik.starter.telegram.filter.CommandFilter
+//import kotlin.reflect.KClass
+//
+///**
+// * Marks the filter as one that must happen before filter [value].
+// * [offset] is optional to mark the "distance" between the two filters.
+// *
+// * [offset] is useful when you have a lot of filters, and you want to ensure they are sequential one after another.
+// *
+// * If [value] filter had order `n`, then filter marked with this annotation will have order `n - offset`.
+// */
+//@Target(AnnotationTarget.CLASS)
+//@Retention(AnnotationRetention.RUNTIME)
+//@MustBeDocumented
+//annotation class FilterBefore(val value: KClass<out CommandFilter>, val offset: UInt = 1u)

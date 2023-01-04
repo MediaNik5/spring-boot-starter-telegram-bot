@@ -6,6 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
+    id("org.jetbrains.dokka") version "1.6.21"
     `maven-publish`
     `java-library`
     signing
@@ -22,6 +23,7 @@ repositories {
 dependencies {
     val tgbotapi_version = "2.1.0"
     testImplementation(kotlin("test"))
+    implementation("io.ktor:ktor-server-netty:2.0.3")
     implementation("dev.inmo:tgbotapi:$tgbotapi_version")
     implementation("dev.inmo:tgbotapi.core:$tgbotapi_version")
     implementation("dev.inmo:tgbotapi.api:$tgbotapi_version")
@@ -31,6 +33,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.21")
 }
 
 tasks.test {
